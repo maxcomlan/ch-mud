@@ -41,8 +41,6 @@ public class Room {
 
 	public void setEst(Room est) {
 		this.est = est;
-		/// auto ajustement vectoriel. Si une salle est placée a mon est, la salle doit en retour savoir que je suis son ouest
-		est.setOuest(this);
 	}
 
 
@@ -53,8 +51,6 @@ public class Room {
 
 	public void setOuest(Room ouest) {
 		this.ouest = ouest;
-		/// auto ajustement vectoriel. Si une salle est placée a mon ouest, la salle doit en retour savoir que je suis son est
-		ouest.setEst(this);
 	}
 
 
@@ -65,8 +61,6 @@ public class Room {
 
 	public void setNord(Room nord) {
 		this.nord = nord;
-		/// auto ajustement vectoriel. Si une salle est placée a mon nord, la salle doit en retour savoir que je suis son sud
-		nord.setSud(this);
 	}
 
 
@@ -77,13 +71,12 @@ public class Room {
 
 	public void setSud(Room sud) {
 		this.sud = sud;
-		/// auto ajustement vectoriel. Si une salle est placée a mon sud, la salle doit en retour savoir que je suis son nord
-		sud.setNord(this);
 	}
 	
 	
 	public boolean ajouterPersonnage(Personnage personnage) {
 		if(!this.personnages.containsKey(personnage.guid)) {
+			personnage.setRoom(this);
 			this.personnages.put(personnage.guid, personnage);
 			return true;
 		}
@@ -92,6 +85,7 @@ public class Room {
 	
 	public boolean retirerPersonnage(Personnage p) {
 		if(this.personnages.containsKey(p.guid)) {
+			p.setRoom(null);
 			this.personnages.remove(p.guid);
 			return true;
 		}
@@ -140,5 +134,25 @@ public class Room {
 		}
 		
 		return found;
+	}
+	
+	public static void setNord(Room source, Room guest) {
+		source.setNord(guest);
+		guest.setSud(source);
+	}
+	
+	public static void setSud(Room source, Room guest) {
+		source.setSud(guest);
+		guest.setNord(source);
+	}
+	
+	public static void setEst(Room source, Room guest) {
+		source.setEst(guest);
+		guest.setOuest(source);
+	}
+	
+	public static void setOuest(Room source, Room guest) {
+		source.setOuest(guest);
+		guest.setEst(source);
 	}
 }

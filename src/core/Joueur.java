@@ -2,8 +2,8 @@ package core;
 
 public class Joueur extends Personnage {
 
-	public Joueur(String guid, String name) {
-		super(guid, name, 2, 2, null);
+	public Joueur(String guid) {
+		super(guid, "", 2, 2, null);
 	}
 
 	public boolean bouger(String direction) {

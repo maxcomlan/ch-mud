@@ -33,4 +33,8 @@ public class MudGame {
 		return this;
 	}
 	
+	public void faireVenirDansLeJeu(Joueur j) {
+		this.getBase().ajouterPersonnage(j);
+	}
+	
 }

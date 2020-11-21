@@ -38,7 +38,7 @@ public class Personnage {
 	}
 	
 	private void setVie(int vie) {
-		if(force < 0) {
+		if(vie < 0) {
 			this.vie = 0;
 		}
 		else {
