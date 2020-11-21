@@ -6,8 +6,55 @@ public class Joueur extends Personnage {
 		super(guid, name, 2, 2, null);
 	}
 
-	public void bouger(String direction) {
-		
+	public boolean bouger(String direction) {
+		switch(direction.toUpperCase()) {
+			case "E", "EAST", "EST" :
+				return this.allerEst();
+			case "O","WEST", "OUEST": 
+				return this.allerOuest();
+			case "N", "NORTH", "NORD":
+				this.allerNord();
+			case "S", "SOUTH", "SUD":
+				return this.allerSud();
+			default: 
+				return false;
+		}
+	}
+	
+	private boolean allerEst() {
+		if(this.room.getEst() != null) {
+			this.room.retirerPersonnage(this);
+			this.room.getEst().ajouterPersonnage(this);
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean allerOuest() {
+		if(this.room.getOuest() != null) {
+			this.room.retirerPersonnage(this);
+			this.room.getOuest().ajouterPersonnage(this);
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean allerNord() {
+		if(this.room.getNord() != null) {
+			this.room.retirerPersonnage(this);
+			this.room.getNord().ajouterPersonnage(this);
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean allerSud() {
+		if(this.room.getSud() != null) {
+			this.room.retirerPersonnage(this);
+			this.room.getSud().ajouterPersonnage(this);
+			return true;
+		}
+		return false;
 	}
 	
 	public void attaquer(Personnage p) {
