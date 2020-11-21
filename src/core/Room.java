@@ -1,16 +1,15 @@
 package core;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Room {
 	
 	public String id;
 	private String description;
-	public Room est;
-	public Room ouest;
-	public Room nord;
-	public Room sud;
+	private Room est;
+	private Room ouest;
+	private Room nord;
+	private Room sud;
 	
 	public HashMap<String, Personnage> personnages;
 	
@@ -28,24 +27,22 @@ public class Room {
 		this.id = id;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
 	public Room getEst() {
 		return est;
 	}
 
-
 	public void setEst(Room est) {
 		this.est = est;
+		/// auto ajustement vectoriel. Si une salle est placée a mon est, la salle doit en retour savoir que je suis son ouest
+		est.setOuest(this);
 	}
 
 
@@ -56,6 +53,8 @@ public class Room {
 
 	public void setOuest(Room ouest) {
 		this.ouest = ouest;
+		/// auto ajustement vectoriel. Si une salle est placée a mon ouest, la salle doit en retour savoir que je suis son est
+		ouest.setEst(this);
 	}
 
 
@@ -66,6 +65,8 @@ public class Room {
 
 	public void setNord(Room nord) {
 		this.nord = nord;
+		/// auto ajustement vectoriel. Si une salle est placée a mon nord, la salle doit en retour savoir que je suis son sud
+		nord.setSud(this);
 	}
 
 
@@ -76,6 +77,8 @@ public class Room {
 
 	public void setSud(Room sud) {
 		this.sud = sud;
+		/// auto ajustement vectoriel. Si une salle est placée a mon sud, la salle doit en retour savoir que je suis son nord
+		sud.setNord(this);
 	}
 	
 	
