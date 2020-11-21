@@ -83,7 +83,7 @@ public class Room {
 	
 	
 	public boolean ajouterPersonnage(Personnage personnage) {
-		if(this.personnages.containsKey(personnage.guid)) {
+		if(!this.personnages.containsKey(personnage.guid)) {
 			this.personnages.put(personnage.guid, personnage);
 			return true;
 		}
