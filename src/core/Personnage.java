@@ -87,6 +87,15 @@ public class Personnage {
 		this.setVie(this.getVie() - vie);
 	}
 	
+	
+	/**
+	 * Verifie si un personnage connaissant son id , se trouve dans la meme salle que le personnage actuel
+	 * @param idPersonnage
+	 * @return
+	 */
+	public boolean estDansLaMemeSalle(String idPersonnage) {
+		return this.room.rechercherUnPersonnage(idPersonnage, "") != null;
+	}
 	/**
 	 * determine sous certaines conditions si le personnage est vivant ou mort
 	 * @return
